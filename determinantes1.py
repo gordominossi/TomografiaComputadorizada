@@ -16,11 +16,8 @@ def calculateA(size, A=np.zeros(0)):
 def calculateDiagonalA(size, A=np.zeros(0)):
     if A.size == 0:
         A = np.zeros((6 * size - 2, size ** 2), int)
+    A = calculateA(size, A)
     for j in range(0, size ** 2):
-        for i in range(0, size):
-            A[i, j] = int(i == j % size)
-        for i in range(0, size):
-            A[i + size, j] = int(i == j // size)
         for i in range(0, 2 * size - 1):
             A[i + 2 * size, j] = int(i == size - 1 + j // size - j % size)
         for i in range(0, 2 * size - 1):
