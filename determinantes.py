@@ -131,5 +131,5 @@ def main(path='EP1_dados/', deltas=[0, 1e-3, 1e-2, 1e-1]):
     # Exibe as tabelas
     plt.show()
 
-
-main()
+if __name__ == '__main__':
+    main()
