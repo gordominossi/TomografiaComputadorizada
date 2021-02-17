@@ -33,7 +33,7 @@ def calculateDeterminants(A, n, deltas=[0, 1e-3, 1e-2, 1e-1]):
     AtA = np.matmul(np.transpose(A), A)
     I = np.identity(n ** 2, int)
     for delta in deltas:
-        dets.append(f"{np.linalg.det(AtA + delta * I)}")
+        dets.append(np.linalg.det(AtA + delta * I))
     return dets
 
 
@@ -79,9 +79,9 @@ def main(path='EP1_dados/'):
     # print('im3_p2:', im3_p1, f"im3_n2 = {im3_n2}\n")
     im3_A2 = calculateDiagonalA(im3_n1)
 
-    dets2_1 = calculateDeterminants(im1_A2, im1_n2)
-    dets2_2 = calculateDeterminants(im2_A2, im2_n2)
-    dets2_3 = calculateDeterminants(im3_A2, im3_n2)
+    dets2_1 = calculateDeterminants(im1_A2, im1_n2, deltas)
+    dets2_2 = calculateDeterminants(im2_A2, im2_n2, deltas)
+    dets2_3 = calculateDeterminants(im3_A2, im3_n2, deltas)
 
     fig1, ax1 = plt.subplots()
     fig1.patch.set_visible(False)
@@ -93,16 +93,16 @@ def main(path='EP1_dados/'):
     ax2.axis('off')
     ax2.axis('tight')
 
-    table1 = ax1.table(colLabels=list(map(lambda delta: f"delta = {delta:.3E}", deltas)), rowLabels=[
-                     ' im1 ', ' im2 ',  ' im3 '], cellText=[dets1_1, dets1_2, dets1_3], loc='top')
+    table1 = ax1.table(colLabels=list(map(lambda delta: f"delta = {delta:.0e}", deltas)), rowLabels=[
+        ' im1 ', ' im2 ',  ' im3 '], cellText=[dets1_1, dets1_2, dets1_3], loc='top')
 
     table1.auto_set_font_size(False)
     table1.set_fontsize(6)
     fig1.suptitle("Projeções horizontais e verticais")
     fig1.tight_layout()
 
-    table2 = ax2.table(colLabels=list(map(lambda delta: f"delta = {delta:.3E}", deltas)), rowLabels=[
-                     ' im1 ', ' im2 ',  ' im3 '], cellText=[dets2_1, dets2_2, dets2_3], loc='top')
+    table2 = ax2.table(colLabels=list(map(lambda delta: f"delta = {delta:.0e}", deltas)), rowLabels=[
+        ' im1 ', ' im2 ',  ' im3 '], cellText=[dets2_1, dets2_2, dets2_3], loc='top')
 
     table2.auto_set_font_size(False)
     table2.set_fontsize(6)
