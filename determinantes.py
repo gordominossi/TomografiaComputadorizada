@@ -103,8 +103,6 @@ def main(path='EP1_dados/', deltas=[0, 1e-3, 1e-2, 1e-1]):
     # Configura a tabela referente a p1 para exibição
     fig1, ax1 = plt.subplots()
     fig1.patch.set_visible(False)
-    fig1.suptitle("Projeções horizontais e verticais")
-    fig1.tight_layout()
     ax1.axis('off')
     ax1.axis('tight')
 
