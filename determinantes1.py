@@ -28,7 +28,7 @@ def calculateDiagonalA(size, A=np.zeros(0)):
     return A
 
 
-def calculateDeterminants(A, n, deltas=[0, 1e-3, 1e-2, 1e-1], label=''):
+def calculateDeterminants(A, n, deltas=[0, 1e-3, 1e-2, 1e-1]):
     dets = []
     AtA = np.matmul(np.transpose(A), A)
     I = np.identity(n ** 2, int)
@@ -58,9 +58,9 @@ def main(path='EP1_dados/'):
     # print('im3_p1:', im3_p1, f"im3_n1 = {im3_n1}\n")
     im3_A1 = calculateA(im3_n1)
 
-    dets1_1 = calculateDeterminants(im1_A1, im1_n1, label='im1_p1')
-    dets1_2 = calculateDeterminants(im2_A1, im2_n1, label='im2_p1')
-    dets1_3 = calculateDeterminants(im3_A1, im3_n1, label='im3_p1')
+    dets1_1 = calculateDeterminants(im1_A1, im1_n1, deltas)
+    dets1_2 = calculateDeterminants(im2_A1, im2_n1, deltas)
+    dets1_3 = calculateDeterminants(im3_A1, im3_n1, deltas)
 
     # print('\n p2:\n_____\n')
 
@@ -79,22 +79,35 @@ def main(path='EP1_dados/'):
     # print('im3_p2:', im3_p1, f"im3_n2 = {im3_n2}\n")
     im3_A2 = calculateDiagonalA(im3_n1)
 
-    dets1_1 = calculateDeterminants(im1_A2, im1_n2, label='im1_p2')
-    dets1_2 = calculateDeterminants(im2_A2, im2_n2, label='im2_p2')
-    dets1_3 = calculateDeterminants(im3_A2, im3_n2, label='im3_p2')
+    dets2_1 = calculateDeterminants(im1_A2, im1_n2)
+    dets2_2 = calculateDeterminants(im2_A2, im2_n2)
+    dets2_3 = calculateDeterminants(im3_A2, im3_n2)
 
-    fig, ax = plt.subplots()
-    fig.patch.set_visible(False)
-    ax.axis('off')
-    ax.axis('tight')
+    fig1, ax1 = plt.subplots()
+    fig1.patch.set_visible(False)
+    ax1.axis('off')
+    ax1.axis('tight')
 
-    table = ax.table(colLabels=list(map(lambda delta: f"delta = {delta:.1E}", deltas)), rowLabels=[
-                     ' im1 ', ' im2 ',  ' im3 '], cellText=[dets1_1, dets1_2, dets1_3], loc='center')
+    fig2, ax2 = plt.subplots()
+    fig2.patch.set_visible(False)
+    ax2.axis('off')
+    ax2.axis('tight')
 
-    table.auto_set_font_size(False)
-    table.set_fontsize(6)
-    # table.scale(2, 2)
-    fig.tight_layout()
+    table1 = ax1.table(colLabels=list(map(lambda delta: f"delta = {delta:.3E}", deltas)), rowLabels=[
+                     ' im1 ', ' im2 ',  ' im3 '], cellText=[dets1_1, dets1_2, dets1_3], loc='top')
+
+    table1.auto_set_font_size(False)
+    table1.set_fontsize(6)
+    fig1.suptitle("Projeções horizontais e verticais")
+    fig1.tight_layout()
+
+    table2 = ax2.table(colLabels=list(map(lambda delta: f"delta = {delta:.3E}", deltas)), rowLabels=[
+                     ' im1 ', ' im2 ',  ' im3 '], cellText=[dets2_1, dets2_2, dets2_3], loc='top')
+
+    table2.auto_set_font_size(False)
+    table2.set_fontsize(6)
+    fig2.suptitle("Projeções horizontais, verticais e diagonais")
+    fig2.tight_layout()
 
     plt.show()
 
