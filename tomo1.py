@@ -3,6 +3,21 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+'''
+' Encontra a solução f para (At*A + d * I_n) * f = At * p
+'''
+
+
+def solveF(A, delta, n, p):
+    return np.matmul(np.matmul(np.linalg.inv(np.matmul(A.T, A) + delta * np.identity(n ** 2, int)), A.T), p)
+
+
+'''
+' Função principal do programa
+' Calcula as soluções f para as figuras dadas e exibe uma tabela com os resultados
+'''
+
+
 def main(path='EP1_dados/', deltas=[0, 1e-3, 1e-2, 1e-1]):
     # Carrega informações de p1
     im1_p1 = np.load(path + 'im1/p1.npy')
@@ -28,8 +43,7 @@ def main(path='EP1_dados/', deltas=[0, 1e-3, 1e-2, 1e-1]):
             axs[j].axis('off')
             try:
                 # Encontra a solução f para as projeções p dadas
-                f = np.matmul(np.matmul(np.linalg.inv(np.matmul(
-                    ims_A1[i].T, ims_A1[i]) + deltas[j] * np.identity(ims_n1[i] ** 2, int)), ims_A1[i].T), ims_p1[i])
+                f = solveF(ims_A1[i], deltas[j], ims_n1[i], ims_p1[i])
                 axs[j].imshow(f.reshape(ims_n1[i], ims_n1[i]).T)
             except:
                 pass
