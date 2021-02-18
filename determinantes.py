@@ -38,7 +38,7 @@ def calculateDiagonalA(size, A=np.zeros(0)):
 
 
 '''
-' Calcula os determinantes da multiplicação A_transposta * A mais um termo de regularização delta * I
+' Calcula os determinantes da multiplicação At * A mais o termo de regularização d * I_n
 ' a fim de minimizar a norma euclidiana da solução
 '''
 
@@ -69,7 +69,7 @@ def main(path='EP1_dados/', deltas=[0, 1e-3, 1e-2, 1e-1]):
     ims_n1 = []
     ims_A1 = []
     dets1 = []
-    print('\n Calculando determinantes de p1...\n')
+    print('\n Calculando determinantes de A1...\n')
     for i in range(len(ims_p1)):
         ims_n1.append(int(ims_p1[i].size / 2))
         ims_A1.append(calculateA(ims_n1[i]))
@@ -85,7 +85,7 @@ def main(path='EP1_dados/', deltas=[0, 1e-3, 1e-2, 1e-1]):
     ims_n2 = []
     ims_A2 = []
     dets2 = []
-    print('\n Calculando determinantes de p2...\n')
+    print('\n Calculando determinantes de A2...\n')
     for i in range(len(ims_p2)):
         ims_n2.append(int((ims_p2[i].size + 2) / 6))
         ims_A2.append(calculateDiagonalA(ims_n2[i]))

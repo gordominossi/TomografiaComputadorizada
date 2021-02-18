@@ -28,7 +28,7 @@ def main(path='EP1_dados/', deltas=[0, 1e-3, 1e-2, 1e-1]):
     ims_n1 = []
     ims_A1 = []
     dets1 = []
-    print('\n Calculando determinantes de p1...\n')
+    print('\n Calculando determinantes de A1...\n')
     for j in range(len(ims_p1)):
         ims_n1.append(int(ims_p1[j].size / 2))
         ims_A1.append(determinantes.calculateA(ims_n1[j]))
