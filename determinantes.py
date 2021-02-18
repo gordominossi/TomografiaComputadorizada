@@ -106,12 +106,12 @@ def main(path='EP1_dados/', deltas=[0, 1e-3, 1e-2, 1e-1]):
     ax1.axis('off')
     ax1.axis('tight')
 
-    table1 = ax1.table(colLabels=list(map(lambda delta: f"delta = {delta:.0e}", deltas)), rowLabels=[
+    table1 = ax1.table(colLabels=list(map(lambda delta: f'delta = {delta:.0e}', deltas)), rowLabels=[
         ' im1 ', ' im2 ',  ' im3 '], cellText=[dets1_1, dets1_2, dets1_3], loc='top')
 
     table1.auto_set_font_size(False)
     table1.set_fontsize(6)
-    fig1.suptitle("Projeções horizontais e verticais")
+    fig1.suptitle('Projeções horizontais e verticais')
     fig1.tight_layout()
 
     # Configura a tabela referente a p2 para exibição
@@ -120,12 +120,12 @@ def main(path='EP1_dados/', deltas=[0, 1e-3, 1e-2, 1e-1]):
     ax2.axis('off')
     ax2.axis('tight')
 
-    table2 = ax2.table(colLabels=list(map(lambda delta: f"delta = {delta:.0e}", deltas)), rowLabels=[
+    table2 = ax2.table(colLabels=list(map(lambda delta: f'delta = {delta:.0e}', deltas)), rowLabels=[
         ' im1 ', ' im2 ',  ' im3 '], cellText=[dets2_1, dets2_2, dets2_3], loc='top')
 
     table2.auto_set_font_size(False)
     table2.set_fontsize(6)
-    fig2.suptitle("Projeções horizontais, verticais e diagonais")
+    fig2.suptitle('Projeções horizontais, verticais e diagonais')
     fig2.tight_layout()
 
     # Exibe as tabelas
