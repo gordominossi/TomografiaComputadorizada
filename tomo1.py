@@ -26,11 +26,13 @@ def main(path='EP1_dados/', deltas=[0, 1e-3, 1e-2, 1e-1]):
         fig.patch.set_visible(False)
         for j in range(len(dets1[i])):
             axs[j].axis('off')
-            if dets1[i][j] != 0:
+            try:
                 # Encontra a solução f para as projeções p dadas
                 f = np.matmul(np.matmul(np.linalg.inv(np.matmul(
                     ims_A1[i].T, ims_A1[i]) + deltas[j] * np.identity(ims_n1[i] ** 2, int)), ims_A1[i].T), ims_p1[i])
                 axs[j].imshow(f.reshape(ims_n1[i], ims_n1[i]).T)
+            except:
+                pass
             axs[j].set_title(f'delta = {deltas[j]}')
             axs[j].title.set_fontsize(6)
         # Configura a imagem de f*
