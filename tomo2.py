@@ -20,31 +20,31 @@ def solveF(A, delta, n, p):
 
 def main(path='EP1_dados/', deltas=[0, 1e-3, 1e-2, 1e-1]):
     # Carrega informações de p1
-    im1_p1 = np.load(path + 'im1/p1.npy')
-    im2_p1 = np.load(path + 'im2/p1.npy')
-    im3_p1 = np.load(path + 'im3/p1.npy')
-    ims_p1 = [im1_p1, im2_p1, im3_p1]
+    im1_p2 = np.load(path + 'im1/p2.npy')
+    im2_p2 = np.load(path + 'im2/p2.npy')
+    im3_p2 = np.load(path + 'im3/p2.npy')
+    ims_p2 = [im1_p2, im2_p2, im3_p2]
 
-    ims_n1 = []
-    ims_A1 = []
-    dets1 = []
-    print('\n Calculando determinantes de A1...\n')
-    for j in range(len(ims_p1)):
-        ims_n1.append(int(ims_p1[j].size / 2))
-        ims_A1.append(determinantes.calculateA(ims_n1[j]))
-        dets1.append(determinantes.calculateDeterminants(
-            ims_A1[j], ims_n1[j], deltas))
+    ims_n2 = []
+    ims_A2 = []
+    dets2 = []
+    print('\n Calculando determinantes de A2...\n')
+    for j in range(len(ims_p2)):
+        ims_n2.append(int((ims_p2[j].size + 2) / 6))
+        ims_A2.append(determinantes.calculateDiagonalA(ims_n2[j]))
+        dets2.append(determinantes.calculateDeterminants(
+            ims_A2[j], ims_n2[j], deltas))
 
     # Configura as imagens referentes a f para exibição
-    for i in range(len(ims_p1)):
-        fig, axs = plt.subplots(1, len(dets1[i]) + 1)
+    for i in range(len(ims_p2)):
+        fig, axs = plt.subplots(1, len(dets2[i]) + 1)
         fig.patch.set_visible(False)
-        for j in range(len(dets1[i])):
+        for j in range(len(dets2[i])):
             axs[j].axis('off')
             try:
                 # Encontra a solução f para as projeções p dadas
-                f = solveF(ims_A1[i], deltas[j], ims_n1[i], ims_p1[i])
-                axs[j].imshow(f.reshape(ims_n1[i], ims_n1[i]).T)
+                f = solveF(ims_A2[i], deltas[j], ims_n2[i], ims_p2[i])
+                axs[j].imshow(f.reshape(ims_n2[i], ims_n2[i]).T)
             except:
                 pass
             axs[j].set_title(f'delta = {deltas[j]}')
