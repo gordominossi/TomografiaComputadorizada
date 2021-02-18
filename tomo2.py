@@ -29,11 +29,12 @@ def main(path='EP1_dados/', deltas=[0, 1e-3, 1e-2, 1e-1]):
     ims_A2 = []
     dets2 = []
     print('\n Calculando determinantes de A2...\n')
-    for j in range(len(ims_p2)):
-        ims_n2.append(int((ims_p2[j].size + 2) / 6))
-        ims_A2.append(determinantes.calculateDiagonalA(ims_n2[j]))
+    for i in range(len(ims_p2)):
+        ims_n2.append(int((ims_p2[i].size + 2) / 6))
+        ims_A2.append(determinantes.calculateDiagonalA(ims_n2[i]))
+        print(f'\nA2_{i}:\n', ims_A2[i])
         dets2.append(determinantes.calculateDeterminants(
-            ims_A2[j], ims_n2[j], deltas))
+            ims_A2[i], ims_n2[i], deltas))
 
     # Configura as imagens referentes a f para exibição
     for i in range(len(ims_p2)):
